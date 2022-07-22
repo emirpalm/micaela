@@ -15,14 +15,21 @@ module.exports = {
     },
     list(_, res) {
             return producto
-            .findAll({})
+            .findAll({  
+                where: {
+                    activo: true
+              }
+            })
             .then(producto => res.status(200).send(producto))
             .catch(error => res.status(400).send(error));
     },
     find(req, res) {
             return producto
             .findOne({
-                nombre: req.params.name
+                where: {
+                    nombre: req.params.name,
+                    activo: true
+              }
             })
             .then(producto => res.status(200).send(producto))
             .catch(error => res.status(400).send(error));

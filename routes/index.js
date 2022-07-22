@@ -1,6 +1,7 @@
 /* Controllers */
 const productoController = require('../controllers/productoController');
 const areaController = require('../controllers/areaController');
+const unidadController = require('../controllers/unidadController');
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send ({
@@ -14,4 +15,8 @@ module.exports = (app) => {
     app.get('/api/areas/list', areaController.list);
     app.get('/api/areas/find/area/:name', areaController.find);
     app.post('/api/areas', areaController.Create);
+
+    app.get('/api/unidades/list', unidadController.list);
+    app.get('/api/unidades/find/unidad/:name', unidadController.find);
+    app.post('/api/unidades', unidadController.Create);
 }

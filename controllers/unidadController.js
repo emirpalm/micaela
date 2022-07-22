@@ -1,31 +1,32 @@
 const Sequelize = require('sequelize');
-const area = require('../models').area;
+const unidad = require('../models').unidad;
 
 
 module.exports = {
     Create(req, res) {
-        return area
+        return unidad
         .create({
-            nombre: req.body.nombre
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion
         })
-        .then(area => res.status(201).send(area))
+        .then(unidad => res.status(201).send(unidad))
         .catch(error => res.status(400).send(error));
     },
     list(_, res) {
-            return area
+            return unidad
             .findAll({})
-            .then(area => res.status(200).send(area))
+            .then(unidad => res.status(200).send(unidad))
             .catch(error => res.status(400).send(error));
     },
     find(req, res) {
-            return area
+            return unidad
             .findOne({
                 where: {
                     nombre: req.params.name,
                     activo: true
               }
             })
-            .then(area => res.status(200).send(area))
+            .then(unidad => res.status(200).send(unidad))
             .catch(error => res.status(400).send(error));
         },
 };
