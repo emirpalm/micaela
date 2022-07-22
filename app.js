@@ -10,7 +10,9 @@ app.use(logger('dev'));
 // Analizar los datos de las solicitudes entrantes (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 // Configuracion una ruta general predeterminada que envíe un mensaje de bienvenida en formato JSON.
+require('./routes')(app);
 app.get('*', (req, res) => res.status(200).send({
      message: 'Bienvenido a MICAELA',
 }));
