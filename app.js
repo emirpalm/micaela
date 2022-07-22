@@ -1,18 +1,18 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-// This will be our application entry. We'll setup our server here.
+// Esta será nuestra entrada de aplicación. Configuracion de nuestro servidor aquí.
 const http = require('http');
-// Set up the express app
+// Configurar la aplicación express
 const app = express();
-// Log requests to the console.
+// Registro de solicitudes en la consola.
 app.use(logger('dev'));
-// Parse incoming requests data (https://github.com/expressjs/body-parser)
+// Analizar los datos de las solicitudes entrantes (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// Setup a default catch-all route that sends back a welcome message in JSON format.
+// Configuracion una ruta general predeterminada que envíe un mensaje de bienvenida en formato JSON.
 app.get('*', (req, res) => res.status(200).send({
-     message: 'Welcome to the beginning of nothingness.',
+     message: 'Bienvenido a MICAELA',
 }));
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
