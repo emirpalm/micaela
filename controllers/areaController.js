@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const area = require('../models').area;
-
+const subarea = require('../models').subarea;
 
 module.exports = {
     Create(req, res) {
@@ -23,7 +23,11 @@ module.exports = {
                 where: {
                     nombre: req.params.name,
                     activo: true
-              }
+              },
+              include: [{
+                model: subarea,
+                as: 'subarea'
+             }]
             })
             .then(area => res.status(200).send(area))
             .catch(error => res.status(400).send(error));

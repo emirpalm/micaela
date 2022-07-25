@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class area extends Model {
+  class subarea extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,18 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      area.hasMany(models.subarea, {
-        as: 'subarea',
-        foreignKey: 'area_id',
-      });
+      subarea.belongsTo(models.area,
+        {
+            as: 'area',
+            foreignKey: 'area_id',
+        }
+    );
     }
   }
-  area.init({
+  subarea.init({
     nombre: DataTypes.STRING,
+    area_id: DataTypes.INTEGER,
     activo: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'area',
+    modelName: 'subarea',
   });
-  return area;
+  return subarea;
 };

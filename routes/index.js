@@ -2,6 +2,7 @@
 const productoController = require('../controllers/productoController');
 const areaController = require('../controllers/areaController');
 const unidadController = require('../controllers/unidadController');
+const subareaController = require('../controllers/subAreaController');
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send ({
@@ -19,4 +20,8 @@ module.exports = (app) => {
     app.get('/api/unidades/list', unidadController.list);
     app.get('/api/unidades/find/unidad/:name', unidadController.find);
     app.post('/api/unidades/create', unidadController.Create);
+
+    app.get('/api/subareas/list', subareaController.list);
+    app.get('/api/subareas/find/subarea/:name', subareaController.find);
+    app.post('/api/subareas/create', subareaController.Create);
 }

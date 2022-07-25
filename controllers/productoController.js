@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const producto = require('../models').producto;
-const productoArea = require('../models').producto_area;
+const productoSubarea = require('../models').producto_subarea;
 
 
 module.exports = {
@@ -17,10 +17,10 @@ module.exports = {
                     unidad_id: req.body.unidad_id
                 });
 
-                for (const trainee of req.body.areas_ids) {
-                    await productoArea.create({
+                for (const subarea_id of req.body.subareas_ids) {
+                    await productoSubarea.create({
                         producto_id: createdProducto.id,
-                        area_id: trainee,
+                        subarea_id: subarea_id,
                     });
                   }
          });
