@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('productos_areas', {
+    await queryInterface.createTable('producto_areas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,7 +10,7 @@ module.exports = {
       },
       producto_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
              model: 'productos',
              key: 'id'
@@ -18,7 +18,7 @@ module.exports = {
       },
       area_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
              model: 'areas',
              key: 'id'

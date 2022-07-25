@@ -11,12 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      producto.belongsTo(models.unidad,
+        {
+            as: 'unidads',
+            foreignKey: 'unidad_id',
+        }
+    );
     }
   }
   producto.init({
     nombre: DataTypes.STRING,
     precio: DataTypes.FLOAT,
-    bid_unidad: DataTypes.INTEGER,
+    unidad_id: DataTypes.INTEGER,
     activo: DataTypes.BOOLEAN
   }, {
     sequelize,

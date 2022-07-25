@@ -10,13 +10,13 @@ module.exports = (app) => {
    
     app.get('/api/productos/list', productoController.list);
     app.get('/api/productos/find/producto/:name', productoController.find);
-    app.post('/api/productos', productoController.Create);
+    app.post('/api/productos/create', productoController.Create);
 
     app.get('/api/areas/list', areaController.list);
     app.get('/api/areas/find/area/:name', areaController.find);
-    app.post('/api/areas', areaController.Create);
+    app.post('/api/areas/create', areaController.Create);
 
     app.get('/api/unidades/list', unidadController.list);
     app.get('/api/unidades/find/unidad/:name', unidadController.find);
-    app.post('/api/unidades', unidadController.Create);
+    app.post('/api/unidades/create', unidadController.Create);
 }
