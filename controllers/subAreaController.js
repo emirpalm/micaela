@@ -14,6 +14,9 @@ module.exports = {
     },
     list(_, res){
         return subarea.findAll({ 
+            where: {
+                activo: true
+          },
             include: [{
               model: area,
               as: 'area'
@@ -31,7 +34,10 @@ module.exports = {
           },
           include: [{
             model: area,
-            as: 'area'
+            as: 'area',
+            where: {
+                activo: true
+            }
          }]
         })
         .then(subarea => res.status(200).send(subarea))

@@ -13,7 +13,11 @@ module.exports = {
     },
     list(_, res) {
             return area
-            .findAll({})
+            .findAll({
+                where: {
+                    activo: true
+              },
+            })
             .then(area => res.status(200).send(area))
             .catch(error => res.status(400).send(error));
     },
@@ -26,7 +30,10 @@ module.exports = {
               },
               include: [{
                 model: subarea,
-                as: 'subarea'
+                as: 'subarea',
+                where: {
+                    activo: true
+              },
              }]
             })
             .then(area => res.status(200).send(area))

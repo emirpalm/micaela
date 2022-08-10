@@ -14,7 +14,11 @@ module.exports = {
     },
     list(_, res) {
             return unidad
-            .findAll({})
+            .findAll({
+                where: {
+                    activo: true
+              },
+            })
             .then(unidad => res.status(200).send(unidad))
             .catch(error => res.status(400).send(error));
     },
