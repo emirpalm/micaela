@@ -34,12 +34,19 @@ module.exports = {
           
           }
     },
-    list(_, res) {
+    list(req, res) {
+        let limit = 5;
+        let offset = 0 + ((Number(req.query.page) || 1) - 1) * limit;
             return producto
             .findAll({  
                 where: {
                     activo: true
-              }
+              },
+              offset: offset,
+              limit: limit,
+              order: [
+                   ['createdAt', 'ASC']
+                ]
             })
             .then(producto => res.status(200).send(producto))
             .catch(error => res.status(400).send(error));

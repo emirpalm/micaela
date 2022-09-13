@@ -12,15 +12,22 @@ module.exports = {
         .then(subarea => res.status(201).send(subarea))
         .catch(error => res.status(400).send(error));
     },
-    list(_, res){
-        return subarea.findAll({ 
+    list(req, res){
+        let limit = 5;
+        let offset = 0 + ((Number(req.query.page) || 1) - 1) * limit;
+        return subarea.findAndCountAll({ 
             where: {
                 activo: true
           },
             include: [{
               model: area,
               as: 'area'
-           }]
+           }],
+           offset: offset,
+           limit: limit,
+           order: [
+                ['createdAt', 'ASC']
+             ]
     })
         .then(subarea => res.status(200).send(subarea))
         .catch(error => res.status(400).send(error));

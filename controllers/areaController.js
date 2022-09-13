@@ -11,12 +11,19 @@ module.exports = {
         .then(area => res.status(201).send(area))
         .catch(error => res.status(400).send(error));
     },
-    list(_, res) {
+    list(req, res) {
+        let limit = 5;
+        let offset = 0 + ((Number(req.query.page) || 1) - 1) * limit;
             return area
-            .findAll({
+            .findAndCountAll({
                 where: {
                     activo: true
               },
+              offset: offset,
+              limit: limit,
+              order: [
+                   ['createdAt', 'ASC']
+                ]
             })
             .then(area => res.status(200).send(area))
             .catch(error => res.status(400).send(error));
@@ -39,4 +46,36 @@ module.exports = {
             .then(area => res.status(200).send(area))
             .catch(error => res.status(400).send(error));
         },
+    update(req, res) {
+            return area
+            .update({
+                nombre: req.body.nombre
+            }, {
+                where: {
+                    id: req.params.id,
+                    activo: true
+              }
+            })
+            .then(area => res.status(200).json({
+                ok: true,
+                message: 'Area actualizada correctamente',
+            }))
+            .catch(error => res.status(400).send(error));
+        },
+    delete(req, res) {
+            return area
+            .update({
+                activo: false
+            }, {
+                where: {
+                    id: req.params.id,
+                    activo: true
+              }
+            })
+            .then(area => res.status(200).json({
+                ok: true,
+                message: 'Area eliminada correctamente',
+            }))
+            .catch(error => res.status(400).send(error));
+        }
 };

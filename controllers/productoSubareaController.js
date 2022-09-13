@@ -38,15 +38,22 @@ module.exports = {
            })
            .catch(error => res.status(400).send(error));
      },
-  list(_, res) {
-     return participacion.findAll({
+  list(req, res) {
+     let limit = 5;
+     let offset = 0 + ((Number(req.query.page) || 1) - 1) * limit;
+     return participacion.findAndCountAll({
            include: [{
                 model: usuario,
                 as: 'usuario'
            },{
                 model: juego,
                 as: 'juego'
-           }]
+           }],
+           offset: offset,
+           limit: limit,
+           order: [
+                ['createdAt', 'ASC']
+             ]
      })
      .then(participacion => res.status(200).send(participacion))
      .catch(error => res.status(400).send(error))

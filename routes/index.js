@@ -15,10 +15,14 @@ module.exports = (app) => {
 
     app.get('/api/areas/list', areaController.list);
     app.get('/api/areas/find/area/:name', areaController.find);
+    app.put('/api/areas/update/area/:id', unidadController.update);
+    app.delete('/api/areas/delete/area/:id', unidadController.delete);
     app.post('/api/areas/create', areaController.Create);
 
     app.get('/api/unidades/list', unidadController.list);
     app.get('/api/unidades/find/unidad/:name', unidadController.find);
+    app.put('/api/unidades/update/unidad/:id', unidadController.update);
+    app.delete('/api/unidades/delete/unidad/:id', unidadController.delete);
     app.post('/api/unidades/create', unidadController.Create);
 
     app.get('/api/subareas/list', subareaController.list);
