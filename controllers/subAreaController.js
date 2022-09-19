@@ -50,4 +50,37 @@ module.exports = {
         .then(subarea => res.status(200).send(subarea))
         .catch(error => res.status(400).send(error));
     },
+    update(req, res) {
+        return subarea
+        .update({
+            nombre: req.body.nombre,
+            area_id: req.body.area_id
+        }, {
+            where: {
+                id: req.params.id,
+                activo: true
+          }
+        })
+        .then(subarea => res.status(200).json({
+            ok: true,
+            message: 'SubArea actualizada correctamente',
+        }))
+        .catch(error => res.status(400).send(error));
+    },
+    delete(req, res) {
+        return subarea
+        .update({
+            activo: false
+        }, {
+            where: {
+                id: req.params.id,
+                activo: true
+          }
+        })
+        .then(subarea => res.status(200).json({
+            ok: true,
+            message: 'SubArea eliminada correctamente',
+        }))
+        .catch(error => res.status(400).send(error));
+    }
 };

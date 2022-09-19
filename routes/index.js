@@ -10,22 +10,24 @@ module.exports = (app) => {
    }));
    
     app.get('/api/productos/list', productoController.list);
-    app.get('/api/productos/find/producto/:name', productoController.find);
+    app.get('/api/productos/find/:name', productoController.find);
     app.post('/api/productos/create', productoController.Create);
 
     app.get('/api/areas/list', areaController.list);
-    app.get('/api/areas/find/area/:name', areaController.find);
-    app.put('/api/areas/update/area/:id', unidadController.update);
-    app.delete('/api/areas/delete/area/:id', unidadController.delete);
+    app.get('/api/areas/find/:name', areaController.find);
+    app.put('/api/areas/update/area/:id', areaController.update);
+    app.delete('/api/areas/delete/area/:id', areaController.delete);
     app.post('/api/areas/create', areaController.Create);
 
     app.get('/api/unidades/list', unidadController.list);
-    app.get('/api/unidades/find/unidad/:name', unidadController.find);
+    app.get('/api/unidades/find/:name', unidadController.find);
     app.put('/api/unidades/update/unidad/:id', unidadController.update);
     app.delete('/api/unidades/delete/unidad/:id', unidadController.delete);
     app.post('/api/unidades/create', unidadController.Create);
 
     app.get('/api/subareas/list', subareaController.list);
-    app.get('/api/subareas/find/subarea/:name', subareaController.find);
+    app.get('/api/subareas/find/:name', subareaController.find);
+    app.put('/api/subareas/update/subarea/:id', subareaController.update);
+    app.delete('/api/subareas/delete/subarea/:id', subareaController.delete);
     app.post('/api/subareas/create', subareaController.Create);
 }
