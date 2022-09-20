@@ -34,11 +34,34 @@ module.exports = {
           
           }
     },
+    async createProd (req, res){
+    
+        try {
+        await producto.sequelize.transaction(async (t) => {
+           await producto
+                .create({
+                    nombre: req.body.nombre,
+                    precio: req.body.precio,
+                    unidad_id: req.body.unidad_id
+                });
+         });
+
+         return res.status(201).json({
+            ok: true,
+            message: 'Producto creado correctamente',
+            data: producto
+        });
+          
+        } catch (error) {
+            res.status(400).send(error)
+          
+          }
+    },
     list(req, res) {
         let limit = 5;
         let offset = 0 + ((Number(req.query.page) || 1) - 1) * limit;
             return producto
-            .findAll({  
+            .findAndCountAll({  
                 where: {
                     activo: true
               },
@@ -62,4 +85,39 @@ module.exports = {
             .then(producto => res.status(200).send(producto))
             .catch(error => res.status(400).send(error));
         },
+        update(req, res) {
+            return producto
+            .update({
+                    nombre: req.body.nombre,
+                    precio: req.body.precio,
+                    unidad_id: req.body.unidad_id
+            }, {
+                where: {
+                    id: req.params.id,
+                    activo: true
+              }
+            })
+            .then(producto => res.status(200).json({
+                ok: true,
+                message: 'Producto actualizado correctamente'
+            }))
+            .catch(error => res.status(400).send(error));
+        },
+        delete(req, res) {
+            return producto
+            .update({
+                activo: false
+            }, {
+                where: {
+                    id: req.params.id,
+                    activo: true
+              }
+            })
+            .then(producto => res.status(200).json({
+                ok: true,
+                message: 'Producto eliminado correctamente',
+                data: producto
+            }))
+            .catch(error => res.status(400).send(error));
+        }
 };

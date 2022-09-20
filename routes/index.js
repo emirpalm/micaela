@@ -11,7 +11,10 @@ module.exports = (app) => {
    
     app.get('/api/productos/list', productoController.list);
     app.get('/api/productos/find/:name', productoController.find);
+    app.put('/api/productos/update/producto/:id', productoController.update);
+    app.delete('/api/productos/delete/producto/:id', productoController.delete);
     app.post('/api/productos/create', productoController.Create);
+    app.post('/api/productos/create/producto', productoController.createProd);
 
     app.get('/api/areas/list', areaController.list);
     app.get('/api/areas/find/:name', areaController.find);
