@@ -1,6 +1,7 @@
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const producto = require('../models').producto;
 const productoSubarea = require('../models').producto_subarea;
+const Op            = Sequelize.Op;
 
 
 module.exports = {
@@ -76,13 +77,18 @@ module.exports = {
     },
     find(req, res) {
             return producto
-            .findOne({
+            .findAll({
                 where: {
-                    nombre: req.params.name,
+                    nombre: {
+                        [Op.like]: '%' + req.params.name + '%'
+                    },
                     activo: true
               }
             })
-            .then(producto => res.status(200).send(producto))
+            .then(producto => res.status(200).json({
+                ok: true,
+                resultados: producto
+            }))
             .catch(error => res.status(400).send(error));
         },
         update(req, res) {

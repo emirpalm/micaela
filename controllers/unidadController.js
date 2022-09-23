@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const unidad = require('../models').unidad;
+const Op            = Sequelize.Op;
 
 
 module.exports = {
@@ -31,9 +32,11 @@ module.exports = {
     },
     find(req, res) {
             return unidad
-            .findOne({
+            .findAll({
                 where: {
-                    nombre: req.params.name,
+                    nombre: {
+                        [Op.like]: '%' + req.params.name + '%'
+                    },
                     activo: true
               }
             })

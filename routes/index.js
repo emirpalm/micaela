@@ -3,6 +3,7 @@ const productoController = require('../controllers/productoController');
 const areaController = require('../controllers/areaController');
 const unidadController = require('../controllers/unidadController');
 const subareaController = require('../controllers/subAreaController');
+const busquedasController = require('../controllers/busquedasController');
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send ({
@@ -33,4 +34,6 @@ module.exports = (app) => {
     app.put('/api/subareas/update/subarea/:id', subareaController.update);
     app.delete('/api/subareas/delete/subarea/:id', subareaController.delete);
     app.post('/api/subareas/create', subareaController.Create);
+
+    app.get('/api/all/search/:busqueda', busquedasController.getTodo);
 }

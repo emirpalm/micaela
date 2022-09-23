@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const area = require('../models').area;
 const subarea = require('../models').subarea;
+const Op            = Sequelize.Op;
 
 module.exports = {
     Create(req, res) {
@@ -30,9 +31,11 @@ module.exports = {
     },
     find(req, res) {
             return area
-            .findOne({
+            .findAll({
                 where: {
-                    nombre: req.params.name,
+                    nombre: {
+                        [Op.like]: '%' + req.params.name + '%'
+                    },
                     activo: true
               },
               include: [{
@@ -43,7 +46,10 @@ module.exports = {
               },
              }]
             })
-            .then(area => res.status(200).send(area))
+            .then(area => res.status(200).json({
+                ok: true,
+                resultados: area
+            }))
             .catch(error => res.status(400).send(error));
         },
     update(req, res) {
